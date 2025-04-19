@@ -1,0 +1,6 @@
+orders:
+  - id: 1
+    order_id: "sample"
+    price: 10000
+    recipient_name: ""
+    remarks: ""
