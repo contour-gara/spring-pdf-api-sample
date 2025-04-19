@@ -1,4 +1,4 @@
-package org.contourgara.infrastructure;
+package org.contourgara.infrastructure.receipt;
 
 import org.contourgara.domain.repository.ReceiptRepository;
 import org.junit.jupiter.api.Disabled;

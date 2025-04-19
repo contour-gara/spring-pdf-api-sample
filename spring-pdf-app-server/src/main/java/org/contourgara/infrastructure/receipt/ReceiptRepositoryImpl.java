@@ -1,4 +1,4 @@
-package org.contourgara.infrastructure;
+package org.contourgara.infrastructure.receipt;
 
 import lombok.RequiredArgsConstructor;
 import org.contourgara.domain.repository.ReceiptRepository;
