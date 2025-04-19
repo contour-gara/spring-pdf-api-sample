@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>領収書</title>
+    <style>
+        body {
+            font-family: "MS Gothic", "Hiragino Kaku Gothic Pro", sans-serif;
+        }
+        .receipt {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .receipt-header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .receipt-body {
+            margin-bottom: 30px;
+        }
+        .receipt-info {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="receipt">
+    <div class="receipt-header">
+        Receipt
+    </div>
+
+    <div class="receipt-body">
+        <div class="receipt-info">
+            <p>Name: <span th:text="${recipientName}">recipientName</span></p>
+            <p>Amount: <span th:text="'¥ ' + ${#numbers.formatInteger(amount, 0, 'COMMA')}">0 yen</span></p>
+            <p>For: <span th:text="${remarks}">remarks</span></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
