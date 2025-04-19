@@ -29,15 +29,15 @@ class ReceiptControllerTest {
     @Test
     void 領収書発行エンドポイントにPOSTした場合200と領収書が返る() {
         // setup
-        doReturn(new byte[0]).when(createReceiptUseCase).execute("sample", "氏名", "テストとして");
+        doReturn(new byte[0]).when(createReceiptUseCase).execute("sample", "test name", "product name");
 
         // execute & assert
         given()
                 .header("Content-Type", "application/json")
                 .body("""
                         {
-                        "recipientName": "氏名",
-                        "remarks": "テストとして"
+                        "recipientName": "test name",
+                        "remarks": "product name"
                         }
                         """)
                 .when()
