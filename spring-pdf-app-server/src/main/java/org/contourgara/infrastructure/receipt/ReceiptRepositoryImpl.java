@@ -1,6 +1,7 @@
 package org.contourgara.infrastructure.receipt;
 
 import lombok.RequiredArgsConstructor;
+import org.contourgara.domain.model.Order;
 import org.contourgara.domain.repository.ReceiptRepository;
 import org.springframework.stereotype.Repository;
 import org.thymeleaf.TemplateEngine;
@@ -16,13 +17,13 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
     private final TemplateEngine templateEngine;
 
     @Override
-    public byte[] create(String recipientName, String remarks) {
+    public byte[] create(Order order) {
         Context context = new Context();
         context.setVariables(
                 Map.ofEntries(
-                        Map.entry("recipientName", recipientName),
-                        Map.entry("remarks", remarks),
-                        Map.entry("amount", 10000)
+                        Map.entry("recipientName", order.recipientName()),
+                        Map.entry("remarks", order.remarks()),
+                        Map.entry("amount", order.amount())
                 )
         );
         String html = templateEngine.process("receipt", context);

@@ -1,5 +1,7 @@
 package org.contourgara.domain.repository;
 
+import org.contourgara.domain.model.Order;
+
 public interface ReceiptRepository {
-    byte[] create(String recipientName, String remarks);
+    byte[] create(Order order);
 }

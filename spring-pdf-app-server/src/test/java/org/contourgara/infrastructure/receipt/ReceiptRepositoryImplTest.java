@@ -1,5 +1,6 @@
 package org.contourgara.infrastructure.receipt;
 
+import org.contourgara.domain.model.Order;
 import org.contourgara.domain.repository.ReceiptRepository;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class ReceiptRepositoryImplTest {
     @Test
     void 宛名と但書を受け取り領収書を返す() {
         // execute
-        byte[] actual = sut.create("test name", "product name");
+        byte[] actual = sut.create(new Order("sample", 10000, "test name", "product name"));
 
         // assert
         assertThat(actual).isNotNull();
@@ -34,7 +35,7 @@ class ReceiptRepositoryImplTest {
     @Test
     void テストのため領収書を出力する() throws Exception {
         // execute
-        byte[] actual = sut.create("test name", "product name");
+        byte[] actual = sut.create(new Order("sample", 10000, "test name", "product name"));
 
         // save
         File file = Paths.get(resourceLoader.getResource("classpath:").getURI().getPath(), "receipt.pdf").toFile();
