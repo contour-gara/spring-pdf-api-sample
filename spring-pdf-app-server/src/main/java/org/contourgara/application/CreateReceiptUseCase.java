@@ -13,7 +13,7 @@ public class CreateReceiptUseCase {
     private final ReceiptRepository receiptRepository;
 
     public byte[] execute(String orderId, String recipientName, String remarks) {
-        Order order = orderRepository.findOrderByOrderId(orderId);
+        Order order = orderRepository.findOrderByOrderId(orderId).get();
         Order updatedOrder = new Order(order.orderId(), order.amount(), recipientName, remarks);
         orderRepository.updateOrderForReceipt(updatedOrder);
         return receiptRepository.create(updatedOrder);

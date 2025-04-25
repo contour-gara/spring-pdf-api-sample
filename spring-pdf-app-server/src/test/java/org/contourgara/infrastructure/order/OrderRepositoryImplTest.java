@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -24,10 +26,10 @@ class OrderRepositoryImplTest {
     @ExpectedDataSet(value = "datasets/expected/order.yml")
     void 受注IDで検索した場合受注が返る() {
         // execute
-        Order actual = sut.findOrderByOrderId("sample");
+        Optional<Order> actual = sut.findOrderByOrderId("sample");
 
         // assert
-        Order expected = new Order("sample", 10000, "", "");
+        Optional<Order> expected = Optional.of(new Order("sample", 10000, "", ""));
         assertThat(actual).isEqualTo(expected);
     }
 

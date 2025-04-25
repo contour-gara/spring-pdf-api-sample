@@ -7,19 +7,20 @@ import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class OrderRepositoryImpl implements OrderRepository {
     private final JdbcClient jdbcClient;
 
     @Override
-    public Order findOrderByOrderId(String orderId) {
+    public Optional<Order> findOrderByOrderId(String orderId) {
         return jdbcClient.sql("SELECT * FROM orders WHERE order_id = :orderId")
                 .param("orderId", orderId)
                 .query(new DataClassRowMapper<>(OrderEntity.class))
                 .optional()
-                .map(OrderEntity::convertToModel)
-                .get();
+                .map(OrderEntity::convertToModel);
     }
 
     @Override
