@@ -14,8 +14,8 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public Order findOrderByOrderId(String orderId) {
-        return jdbcClient.sql("SELECT * FROM orders WHERE order_id = ?")
-                .params(orderId)
+        return jdbcClient.sql("SELECT * FROM orders WHERE order_id = :orderId")
+                .param("orderId", orderId)
                 .query(new DataClassRowMapper<>(OrderEntity.class))
                 .optional()
                 .get()
@@ -24,8 +24,10 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public void updateOrderForReceipt(Order order) {
-        jdbcClient.sql("UPDATE orders SET recipient_name = ?, remarks = ? WHERE order_id = ?")
-                .params(order.recipientName(), order.remarks(), order.orderId())
+        jdbcClient.sql("UPDATE orders SET recipient_name = :recipientName, remarks = :remarks WHERE order_id = :orderId")
+                .param("recipientName", order.recipientName())
+                .param("remarks", order.remarks())
+                .param("orderId", order.orderId())
                 .update();
     }
 }
