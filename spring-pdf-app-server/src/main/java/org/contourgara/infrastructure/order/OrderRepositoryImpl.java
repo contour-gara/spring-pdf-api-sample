@@ -18,8 +18,8 @@ public class OrderRepositoryImpl implements OrderRepository {
                 .param("orderId", orderId)
                 .query(new DataClassRowMapper<>(OrderEntity.class))
                 .optional()
-                .get()
-                .convertToModel();
+                .map(OrderEntity::convertToModel)
+                .get();
     }
 
     @Override
